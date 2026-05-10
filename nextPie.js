@@ -5,7 +5,7 @@ let isCameraActive = false;
 let capturedImage = null;
 let stream = null;
 
-// Elements
+// Elements dari HTML
 const video = document.getElementById('video');
 const canvas = document.getElementById('canvas');
 const capturedPhoto = document.getElementById('capturedPhoto');
@@ -17,6 +17,13 @@ const backBtn = document.getElementById('backBtn');
 const frameArea = document.getElementById('frameArea');
 const frameOverlay = document.getElementById('frameOverlay');
 
+// Elemen baru dari HTML-mu
+const previewImg = document.getElementById('previewImg');
+const previewPlaceholder = document.getElementById('previewPlaceholder');
+
+// Menjalankan kamera otomatis saat web dibuka
+window.addEventListener('load', startCamera);
+
 // Frame colors
 const frameColors = {
     red: 'rgba(248, 124, 139, 0.62)',
@@ -24,17 +31,19 @@ const frameColors = {
     blue: 'rgba(145, 181, 230, 0.62)'
 };
 
-// TEMPLATE FRAME
+// TEMPLATE FRAME (Pastikan huruf besar/kecilnya sama dengan nama file gambar di folder)
 const frameTemplates = {
     red: "Frame Red.jpeg",
     pink: "Frame Pink.jpeg",
     blue: "Frame Blue.jpeg"
 };
 
-// Update frame color
+// Update frame color & overlay
 function updateFrameColor() {
     frameArea.style.backgroundColor = frameColors[currentFrame];
-    frameOverlay.src = frameTemplates[currentFrame];
+    if (frameOverlay) {
+        frameOverlay.src = frameTemplates[currentFrame];
+    }
 }
 
 // Start camera
@@ -44,15 +53,13 @@ async function startCamera() {
             video: {
                 width: { ideal: 1280 },
                 height: { ideal: 720 },
-                facingMode: 'user'
+                facingMode: 'user' // Kamera depan
             }
         });
 
         video.srcObject = stream;
         video.style.display = 'block';
-        
-        // [REVISI]: Membalikkan layar preview video agar tidak mirror
-        video.style.transform = 'scaleX(-1)';
+        video.style.transform = 'scaleX(-1)'; // Anti-mirror untuk live video
         
         placeholder.style.display = 'none';
         capturedPhoto.style.display = 'none';
@@ -60,7 +67,7 @@ async function startCamera() {
 
     } catch (err) {
         console.error('Error accessing camera:', err);
-        placeholder.textContent = 'Tidak dapat mengakses kamera. Pastikan Anda memberikan izin kamera.';
+        placeholder.textContent = 'Tidak dapat mengakses kamera. Pastikan memberikan izin kamera di browser.';
     }
 }
 
@@ -70,71 +77,72 @@ function stopCamera() {
         stream.getTracks().forEach(track => track.stop());
         stream = null;
     }
-
     video.srcObject = null;
     video.style.display = 'none';
     isCameraActive = false;
 }
 
-// Apply filter to canvas
-function applyFilter(ctx, width, height) {
+// Fungsi untuk Update Live Filter
+function updateLiveFilter() {
+    let cssFilter = 'none';
     if (currentFilter === 'bw') {
-        const imageData = ctx.getImageData(0, 0, width, height);
-        const data = imageData.data;
-
-        for (let i = 0; i < data.length; i += 4) {
-            const avg = (data[i] + data[i + 1] + data[i + 2]) / 3;
-            data[i] = avg;
-            data[i + 1] = avg;
-            data[i + 2] = avg;
-        }
-        ctx.putImageData(imageData, 0, 0);
-
+        cssFilter = 'grayscale(100%)';
     } else if (currentFilter === 'vintage') {
-        const imageData = ctx.getImageData(0, 0, width, height);
-        const data = imageData.data;
+        cssFilter = 'sepia(60%) contrast(110%) brightness(90%)';
+    }
 
-        for (let i = 0; i < data.length; i += 4) {
-            data[i] = Math.min(255, data[i] * 1.2);
-            data[i + 1] = data[i + 1] * 0.9;
-            data[i + 2] = data[i + 2] * 0.7;
-        }
-        ctx.putImageData(imageData, 0, 0);
+    // Terapkan efeknya ke video langsung, hasil foto, dan preview di dalam frame
+    video.style.filter = cssFilter;
+    capturedPhoto.style.filter = cssFilter;
+    if (previewImg) {
+        previewImg.style.filter = cssFilter;
     }
 }
 
-// Capture photo
+// Capture photo (Proses Jepret)
 function capturePhoto() {
     if (!video.videoWidth || !video.videoHeight) {
-        alert('Video belum siap. Silakan coba lagi.');
+        alert('Tunggu sebentar, kamera sedang dimuat...');
         return;
     }
 
     canvas.width = video.videoWidth;
     canvas.height = video.videoHeight;
-
     const ctx = canvas.getContext('2d');
 
-    // --- [REVISI]: Membalikkan kanvas sebelum digambar agar hasilnya tidak mirror ---
+    // Anti-mirror untuk kanvas sebelum dicetak
     ctx.translate(canvas.width, 0);
     ctx.scale(-1, 1);
-    // -------------------------------------------------------------------------------
 
+    // Tempelkan filter ke canvas saat dicetak agar tersimpan di foto
+    if (currentFilter === 'bw') {
+        ctx.filter = 'grayscale(100%)';
+    } else if (currentFilter === 'vintage') {
+        ctx.filter = 'sepia(60%) contrast(110%) brightness(90%)';
+    } else {
+        ctx.filter = 'none';
+    }
+
+    // Cetak gambar
     ctx.drawImage(video, 0, 0);
 
-    // --- [REVISI]: Kembalikan posisi kanvas ke normal biar filternya tidak berantakan ---
+    // Kembalikan ke normal
     ctx.setTransform(1, 0, 0, 1, 0, 0);
-    // ------------------------------------------------------------------------------------
 
-    applyFilter(ctx, canvas.width, canvas.height);
-
+    // Simpan data gambar
     capturedImage = canvas.toDataURL('image/png');
 
+    // Tampilkan di area utama
     capturedPhoto.src = capturedImage;
     capturedPhoto.style.display = 'block';
-    
-    // [REVISI]: Pastikan foto yang ditampilkan juga tidak ikut terbalik karena efek CSS video sebelumnya
-    capturedPhoto.style.transform = 'none';
+    capturedPhoto.style.transform = 'none'; 
+
+    // Tampilkan di area FRAME & Sembunyikan tulisan "Preview"
+    if (previewImg && previewPlaceholder) {
+        previewImg.src = capturedImage;
+        previewImg.style.display = 'block';
+        previewPlaceholder.style.display = 'none';
+    }
 
     stopCamera();
 
@@ -156,9 +164,18 @@ shootBtn.addEventListener('click', () => {
 retakeBtn.addEventListener('click', () => {
     capturedImage = null;
     capturedPhoto.style.display = 'none';
+    
+    // Kosongkan frame dan munculkan tulisan "Preview" lagi
+    if (previewImg && previewPlaceholder) {
+        previewImg.src = "";
+        previewImg.style.display = 'none';
+        previewPlaceholder.style.display = 'flex';
+    }
+    
     placeholder.style.display = 'none';
     retakeBtn.disabled = true;
     downloadBtn.disabled = true;
+    
     startCamera();
 });
 
@@ -174,13 +191,8 @@ downloadBtn.addEventListener('click', () => {
 
 // Handle back button
 backBtn.addEventListener('click', () => {
-    stopCamera();
-    capturedImage = null;
-    capturedPhoto.style.display = 'none';
-    placeholder.style.display = 'flex';
-    placeholder.textContent = 'Tekan SHOOT untuk mulai';
-    retakeBtn.disabled = true;
-    downloadBtn.disabled = true;
+    // Kembali ke halaman kuis matematika (index.html)
+    window.location.href = "index.html"; 
 });
 
 // Frame selection
@@ -199,13 +211,16 @@ document.querySelectorAll('.filter-btn').forEach(btn => {
         document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
         e.target.classList.add('active');
         currentFilter = e.target.dataset.filter;
+        
+        // Panggil fungsi live filter setiap kali tombol filter ditekan
+        updateLiveFilter();
     });
 });
 
-// Initialize frame color
+// Initialize frame color saat pertama dibuka
 updateFrameColor();
 
-// Cleanup on page unload
+// Matikan kamera kalau pengguna menutup tab/browser
 window.addEventListener('beforeunload', () => {
     stopCamera();
 });
