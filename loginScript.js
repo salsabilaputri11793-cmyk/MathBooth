@@ -48,7 +48,7 @@ function unlock() {
         msgEl.style.color = "white"; // Ubah jadi putih
         
         setTimeout(() => {
-            window.location.href = "photobooth.html"; 
+            window.location.href = "next.html"; 
         }, 1500);
         
     } else {
