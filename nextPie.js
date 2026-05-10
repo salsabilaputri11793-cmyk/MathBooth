@@ -24,6 +24,10 @@ const previewPlaceholder = document.getElementById('previewPlaceholder');
 // Menjalankan kamera otomatis saat web dibuka
 window.addEventListener('load', startCamera);
 
+// Timer
+const countdownTimer = document.getElementById('countdownTimer');
+let timerInterval; // Untuk menyimpan interval waktu
+
 // Frame colors
 const frameColors = {
     red: 'rgba(248, 124, 139, 0.62)',
@@ -150,10 +154,37 @@ function capturePhoto() {
     downloadBtn.disabled = false;
 }
 
+// Fungsi hitungan mundur (Timer)
+function startCountdown(seconds) {
+    // Nonaktifkan tombol sementara agar user tidak spam klik saat timer berjalan
+    shootBtn.disabled = true; 
+    
+    // Tampilkan timer dan set angka awalnya
+    countdownTimer.style.display = 'block';
+    countdownTimer.textContent = seconds;
+
+    timerInterval = setInterval(() => {
+        seconds--;
+        if (seconds > 0) {
+            // Update angka di layar
+            countdownTimer.textContent = seconds;
+        } else {
+            // Jika timer habis (0)
+            clearInterval(timerInterval);
+            countdownTimer.style.display = 'none'; // Sembunyikan angka timer
+            
+            capturePhoto(); // Ambil foto
+            
+            shootBtn.disabled = false; // Aktifkan tombol kembali
+        }
+    }, 1000); // 1000 ms = 1 detik
+}
+
 // Handle shoot button
 shootBtn.addEventListener('click', () => {
     if (isCameraActive) {
-        capturePhoto();
+        // PANGGIL TIMER DI SINI (Misalnya 3 detik)
+        startCountdown(3); 
     } else {
         startCamera();
         capturedPhoto.style.display = 'none';

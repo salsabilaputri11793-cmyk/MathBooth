@@ -273,3 +273,17 @@ body {
 canvas {
     display: none;
 }
+
+/* TIMER COUNTDOWN */
+.countdown-timer {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    font-size: 150px;
+    color: white;
+    font-family: "Instrument Serif", serif; /* Menyesuaikan font yang sudah kamu pakai */
+    text-shadow: 4px 4px 15px rgba(0, 0, 0, 0.8);
+    z-index: 10; /* Pastikan berada di atas video */
+    pointer-events: none; /* Agar tidak mengganggu klik di area kamera */
+}
