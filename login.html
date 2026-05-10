@@ -4,22 +4,22 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Math Booth</title>
-    <link rel="stylesheet" href ="loginStyle.css">
-     <link href="https://fonts.googleapis.com/css2?family=Irish+Grover&family=Inknut+Antiqua&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="loginStyle.css">
+    <link href="https://fonts.googleapis.com/css2?family=Irish+Grover&family=Inknut+Antiqua&display=swap" rel="stylesheet">
 </head>
 <body>
     <div class="container">
         <img src="background.png" alt="Background" class="bg-image">
-
+    
         <div class="main-image">
-            <img src="NameTag.png" alt="Name Tag">
+            <img src="NameTag.png" alt="illustration">
         </div>
-
+        
         <div class="title-image">
             <img src="Name MATH.svg" alt="Math Title">
         </div>
 
-         <h2 class="subtitle">Solve to Unlock</h2>
+        <h2 class="subtitle">Solve to Unlock</h2>
 
         <div class="booth-image booth-1">
             <img src="Transparant Booth.svg" alt="Booth 1">
@@ -37,13 +37,10 @@
             <input type="number" id="answer-input" placeholder="Input Jawaban" maxlength="10">
         </div>
 
-        <button class="unlock-btn" onclick="checkAnswer()">UNLOCK</button>
+        <button class="unlock-btn" onclick="unlock()">UNLOCK</button>
         
-        <div id="msg" style="position: absolute; left: 1238px; top: 800px; width: 351px; text-align: center; color: #ffaaaa; font-family: 'Inknut Antiqua', serif; font-size: 18px; text-shadow: 2px 2px 4px rgba(0,0,0,0.5);"></div>
+        <div id="msg" style="position: absolute; left: 1238px; top: 780px; width: 351px; text-align: center; color: white; font-family: 'Inknut Antiqua', serif; font-size: 18px; text-shadow: 2px 2px 4px rgba(0,0,0,0.8); z-index: 9999;"></div>
     </div>
-    <script src="loginScript.js" ></script>
+    <script src="loginScript.js"></script>
 </body>
-</html> 
-
-
-         
+</html>
