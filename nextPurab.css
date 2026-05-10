@@ -4,352 +4,336 @@
     box-sizing: border-box;
 }
 
-body {
-    width: 100vw;
-    height: 100vh;
-    overflow: hidden;
-    font-family: Arial, sans-serif;
-    position: relative;
-    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-}
-
-.container {
-    position: relative;
-    width: 1920px;
-    height: 1080px;
-    background: linear-gradient(180deg, #4a5568 0%, #2d3748 100%);
-    overflow: hidden;
-    box-shadow: 0 20px 60px rgba(0, 0, 0, 0.5);
-}
-
-.bg-image {
-    position: absolute;
+.desktop {
     width: 100%;
-    height: 100%;
-    object-fit: cover;
-}
-.main-panel {
-    position: absolute;
-    left: 50%;
-    top: 50%;
-    transform: translate(-50%, -50%);
+    min-width: 1440px;
+    min-height: 1024px;
+    position: relative;
 }
 
-.panel-bg-outer {
+.desktop .rectangle {
     position: absolute;
-    background: #301b06;
-    height: 908px;
-    left: 0;
-    border-radius: 50px;
-    top: 0;
+    top: 51px;
+    left: 31px;
     width: 1378px;
+    height: 908px;
 }
 
-.panel-bg-inner {
+.desktop .div {
     position: absolute;
-    background: #e2ceb1;
-    height: 869px;
-    left: 14px;
-    border-radius: 40px;
-    top: 19px;
+    top: 70px;
+    left: 45px;
     width: 1350px;
-}
-
-/* Buttons */
-.btn {
-    position: absolute;
-    border: none;
-    cursor: pointer;
-    transition: all 0.3s ease;
-}
-
-.btn:hover:not(:disabled) {
-    transform: scale(1.05);
-}
-
-.btn:disabled {
-    opacity: 0.5;
-    cursor: not-allowed;
-}
-
-.btn-download {
-    background: #630808;
-    height: 81px;
-    left: 61px;
-    border-radius: 25px;
-    top: 791px;
-    width: 342px;
-}
-
-.btn-retake {
-    background: #630808;
-    height: 81px;
-    left: 418px;
-    border-radius: 25px;
-    top: 453px;
-    width: 342px;
-}
-
-.btn-shoot {
-    background: white;
-    height: 80px;
-    left: 61px;
-    border-radius: 25px;
-    top: 454px;
-    width: 342px;
-}
-
-.btn-back {
-    background: white;
-    height: 81px;
-    left: 418px;
-    border-radius: 25px;
-    top: 791px;
-    width: 342px;
-}
-
-.btn-text-white {
-    font-family: 'Instrument Serif', serif;
-    font-size: 48px;
-    color: white;
-}
-
-.btn-text-dark {
-    font-family: 'Instrument Serif', serif;
-    font-size: 48px;
-    color: #630808;
-}
-
-.btn-text-back {
-    font-family: 'Instrument Serif', serif;
-    font-size: 64px;
-    color: #630808;
-}
-
-/* Frame Selection Area */
-.frame-area {
-    position: absolute;
-    height: 110px;
-    left: 61px;
-    border-radius: 25px;
-    top: 664px;
-    width: 699px;
-    transition: background-color 0.3s ease;
-}
-
-.frame-title {
-    position: absolute;
-    font-family: 'Jeju Gothic', sans-serif;
-    font-size: 24px;
-    color: #70020f;
-    top: 670px;
-    left: 324px;
-    z-index: 10;
-}
-
-.frame-buttons {
-    position: absolute;
-    left: 87px;
-    top: 698px;
-    display: flex;
-    gap: 9px;
-    z-index: 10;
-}
-
-
-.frame-btn {
-    background: rgba(255, 222, 226, 0.97);
-    border-radius: 100px;
-    border: none;
-    cursor: pointer;
-    transition: all 0.3s ease;
-    font-family: 'Jua', sans-serif;
-    font-size: 36px;
-    color: #70020f;
-}
-
-.frame-btn:hover {
-    transform: scale(1.05);
-}
-
-.frame-btn.active {
-    box-shadow: 0 0 0 4px #70020f;
-}
-
-.frame-btn-red {
-    height: 61px;
-    width: 190px;
-}
-
-.frame-btn-pink {
-    height: 58px;
-    width: 252px;
-}
-
-.frame-btn-blue {
-    height: 61px;
-    width: 190px;
-}
-
-/* Filter Selection Area */
-.filter-area {
-    position: absolute;
-    background: #91b5e6;
-    height: 110px;
-    left: 61px;
-    border-radius: 25px;
-    top: 544px;
-    width: 699px;
-}
-
-.filter-title {
-    position: absolute;
-    font-family: 'Jeju Gothic', sans-serif;
-    font-size: 24px;
-    color: black;
-    opacity: 0.9;
-    top: 550px;
-    left: 309px;
-    z-index: 10;
-}
-
-.filter-buttons {
-    position: absolute;
-    left: 87px;
-    top: 578px;
-    display: flex;
-    gap: 9px;
-    z-index: 10;
-}
-
-.filter-btn {
-    background: rgba(15, 43, 82, 0.97);
-    border-radius: 100px;
-    border: none;
-    cursor: pointer;
-    transition: all 0.3s ease;
-    font-family: 'Jacques Francois Shadow', cursive;
-    color: white;
-}
-
-.filter-btn:hover {
-    transform: scale(1.05);
-}
-
-.filter-btn.active {
-    box-shadow: 0 0 0 4px white;
-}
-
-.filter-btn-bw {
-    height: 61px;
-    width: 190px;
-    font-size: 40px;
-}
-
-.filter-btn-vintage {
-    height: 58px;
-    width: 252px;
-    font-size: 36px;
-}
-
-.filter-btn-none {
-    height: 61px;
-    width: 190px;
-    font-size: 40px;
-}
-
-/* Preview Area */
-.preview-gradient {
-    position: absolute;
-    background: linear-gradient(to bottom, rgba(15, 43, 82, 0.86) 12.5%, rgba(15, 43, 82, 0));
-    height: 842px;
-    left: 930px;
-    border-radius: 30px;
-    top: 38px;
-    width: 353px;
-}
-
-.preview-image {
-    position: absolute;
-    height: 795px;
-    left: 961px;
-    top: 66px;
-    width: 297px;
-    border-radius: 20px;
-    overflow: hidden;
-    background: #1a1a1a;
-}
-
-#frameOverlay{
-    position: absolute;
-    inset: 0;
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-    z-index: 10;
-}
-
-.preview-image img {
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-}
-
-/* Camera Display Area */
-.camera-bg-outer {
-    position: absolute;
-    background: #fffefe;
-    height: 398px;
-    left: 61px;
-    border-radius: 50px;
-    top: 39px;
-    width: 699px;
-}
-
-.camera-bg-inner {
-    position: absolute;
-    background: black;
-    height: 371px;
-    left: 71px;
+    height: 869px;
+    background-color: #e2ceb1;
     border-radius: 40px;
-    top: 52px;
-    width: 680px;
-    overflow: hidden;
 }
 
-#video,
-#capturedPhoto {
+.desktop .rectangle-2 {
     position: absolute;
-    inset: 0;
-    width: 100%;
-    height: 100%;
+    top: 842px;
+    left: 92px;
+    width: 342px;
+    height: 81px;       
+    background-color: #630707;
+    border-radius: 25px;
+}
+
+.desktop.text-wrapper {
+    position: absolute;
+    top: 855px;
+    left: 168px;
+    width: 457px;
+    font-family: "Instrument Serif-Regular", Helvetica;
+    font-weight: 400;
+    color: #ffffff;
+    font-size: 48px;
+    letter-spacing: 0;
+    line-height: normal;
+}
+
+.desktop.rectangle-3 {
+    position: absolute;
+    top: 504px;
+    left: 449px;
+    width: 342px;
+    height: 81px;
+    background-color: #630707;
+    border-radius: 25px;
+}
+
+.desktop.text-wrapper-2 {
+    position: absolute;
+    top: 515px;
+    left: 553px;
+    width: 457px;
+    font-family: "Instrument Serif-Regular", Helvetica;
+    font-weight: 400;
+    color: #ffffff;
+    font-size: 48px;
+    letter-spacing: 0;
+    line-height: normal;
+}
+
+.desktop.rectangle-4 {
+    position: absolute;
+    top: 715px;
+    left: 92px;
+    width: 699px;
+    height: 110px;
+    background-color: #187c8b9d;
+    border-radius: 25px;
+}
+
+.desktop.rectangle-5 {
+    position: absolute;
+    top: 749px;
+    left: 118px;
+    width: 190px;
+    height: 61px;
+    background-color: #ffdee2f7;
+    border-radius: 100px;
+}
+
+.desktop.text-wrapper-3 {
+    position: absolute;
+    top: 757px;
+    left: 181px;
+    font-family: "Jua-Regular", Helvetica;
+    font-weight: 400;
+    color: #70020f;
+    font-size: 36px;
+    letter-spacing: 0;
+    line-height: normal;
+}
+
+.desktop .rectangle-6 {
+    position: absolute;
+    top: 753px;
+    left: 317px;
+    width: 252px;
+    height: 58px;
+    background-color: #ffdee2f7;
+    border-radius: 100px;
+}
+
+.desktop.text-wrapper-4 {
+    left: 407px;
+    width: 100px;
+    position: absolute;
+    top: 762px;
+    font-family: "Jua-Regular", Helvetica;
+    font-weight: 400;
+    color: #70020f;
+    font-size: 36px;
+    letter-spacing: 0;
+    line-height: normal;
+}
+
+.desktop.rectangle-7 {
+    position: absolute;
+    top: 751px;
+    left: 576px;
+    width: 190px;
+    height: 61px;
+    background-color: #ffdee2f7;
+    border-radius: 100px;
+}
+
+.desktop.text-wrapper-5 {
+    left: 639px;
+    position: absolute;
+    top: 762px;
+    font-family: "Jua-Regular", Helvetica;
+    font-weight: 400;
+    color: #70020f;
+    font-size: 36px;
+    letter-spacing: 0;
+    line-height: normal;
+}
+
+.desktop.text-wrapper-6 {
+    top: 721px;
+    left: 355px;
+    width: 204px;
+    color: #70020f;
+    position: absolute;
+    font-family: "JejuGothic-Regular", Helvetica;
+    font-weight: 400;
+    font-size: 24px;
+    letter-spacing: 0;
+    line-height: normal;
+    white-space: nowrap;
+} 
+
+.desktop.rectangle-8 {
+    position: absolute;
+    top: 595px;
+    left: 92px;
+    width: 699px;
+    height: 110px;
+    background-color:#91b5e5;
+    border-radius: 25px;
+}
+
+.desktop.text-wrapper-7 {
+    top: 601px;
+    left: 340px;
+    width: 437px;
+    opacity: 0.9;
+    color: #000000;
+    position: absolute;
+    font-family: "JejuGothic-Regular", Helvetica;
+    font-weight: 400;
+    font-size: 24px;
+    letter-spacing: 0;
+    line-height: normal;
+    white-space: nowrap;
+}
+
+.desktop.rectangle-9 {
+    position: absolute;
+    top: 629px;
+    left: 118px;
+    width: 190px;
+    height: 61px;
+    background-color: #0e2a51f7;
+    border-radius: 100px;
+    }
+
+.desktop.b-w {
+    position: absolute;
+    top: 633px;
+    left: 160px;
+    font-family: "Jacques brancois Shadow-Regular", Helvetica;
+    font-weight: 400;
+    color: #ffffff;
+    font-size: 40px;
+    letter-spacing: 0;
+    line-height: normal;
+} 
+
+.desktop.rectangle-10 {
+    position: absolute;
+    top: 632px;
+    left: 317px;
+    width: 252px;
+    height: 58px;
+    background-color: #0e2a51f7;
+    border-radius: 100px;
+} 
+
+.desktop.text-wrapper-8 {
+    position: absolute;
+    top: 637px;
+    left: 340px;
+    width: 353px;
+    font-family: "Jacques Francois Shadow-Regular", Helvetica;
+    font-weight: 400;
+    color: #ffffff;
+    font-size: 36px;
+    letter-spacing: 0;
+    line-height: normal;
+} 
+
+.desktop .rectangle-11 {
+    position: absolute;
+    top: 629px;
+    left: 576px;
+    width: 190px;
+    height: 61px;
+    background-color: #0e2a51f7;
+    border-radius: 100px;
+}
+
+.desktop.text-wrapper-9 {
+    position: absolute;
+    top: 632px;
+    left: 617px;
+    font-family: "Jacques Francois Shadow-Regular", Helvetica;
+    font-weight: 400;
+    color: #ffffff;
+    font-size: 40px;
+    letter-spacing: 0;
+    line-height: normal;
+}
+
+.desktop .img {
+    position: absolute;
+    top: 505px;
+    left: 92px;
+    width: 342px;
+    height: 80px;
+} 
+
+.desktop.text-wrapper-10 {
+    position: absolute;
+    top: 515px;
+    left: 214px;
+    width: 251px;
+    font-family: "Instrument Serif-Regular", Helvetica;
+    font-weight: 400;
+    color: #630707;
+    font-size: 48px;
+    letter-spacing: 0;
+    line-height: normal;
+}
+
+.desktop .rectangle-12 {
+    position: absolute;
+    top: 842px;
+    left: 449px;
+    width: 342px;
+    height: 81px;
+}
+
+.desktop.text-wrapper-11 {
+    position: absolute;
+    top: 842px;
+    left: 564px;
+    font-family: "Instrument Serif-Regular", Helvetica;
+    font-weight: 400;
+    color: #630707;
+    font-size: 64px;
+    letter-spacing: 0;
+    line-height: normal;
+}
+.desktop .rectangle-13 {
+    position: absolute;
+    top: 89px;
+    left: 961px;
+    width: 353px;
+    height: 842px;
+    border-radius: 30px;
+    background: liner-gradient(180deg, rgba(15, 43, 82, 0.86) 13%, rgba(15, 43, 82, 0.8)100%); 
+}
+
+.desktop .image {
+    position: absolute;
+    top: 117px;
+    left: 902px;
+    width: 297px;
+    height: 795px;
+    aspect-ratio: 0.37;
     object-fit: cover;
 }
 
-.placeholder-text {
+.desktop .rectangle-14 {
     position: absolute;
-    inset: 0;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    color: white;
-    font-size: 24px;
-    text-align: center;
-    padding: 20px;
+    top: 90px;
+    left: 91px;
+    width: 699px;
+    height: 398px;
+    background-color: #fffefe;
+    border-radius: 50px;
 }
 
-#canvas {
-    display: none;
-}
-
-@media (max-width: 1440px) {
-    .main-panel {
-        transform: translate(-50%, -50%) scale(0.7);
-    }
-}
-
-@media (max-width: 1024px) {
-    .main-panel {
-        transform: translate(-50%, -50%) scale(0.5);
-    }
+.dekstop .rectangle-15 {
+    position: absolute;
+    top: 103px;
+    left: 102px;
+    width: 680px;
+    height: 371px;
+    background-color: #000000;
+    border-radius: 40px;
 }
