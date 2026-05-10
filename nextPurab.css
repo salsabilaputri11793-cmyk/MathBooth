@@ -1,339 +1,253 @@
 * {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
 }
 
-.desktop {
-    width: 100%;
-    min-width: 1440px;
-    min-height: 1024px;
-    position: relative;
+body {
+  min-height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-family: "Jeju Gothic", sans-serif;
+  background-image: url("background.png");
+  background-size: cover;
+  background-position: center;
 }
 
-.desktop .rectangle {
-    position: absolute;
-    top: 51px;
-    left: 31px;
-    width: 1378px;
-    height: 908px;
+.container {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  padding: 20px;
 }
 
-.desktop .div {
-    position: absolute;
-    top: 70px;
-    left: 45px;
-    width: 1350px;
-    height: 869px;
-    background-color: #e2ceb1;
-    border-radius: 40px;
+.main-panel {
+  width: 1240px;
+  height: 960px;
+  background: #d7c4a8;
+  border: 10px solid #3d1808;
+  border-radius: 30px;
+  position: relative;
+  padding: 40px;
+  overflow: hidden;
 }
 
-.desktop .rectangle-2 {
-    position: absolute;
-    top: 842px;
-    left: 92px;
-    width: 342px;
-    height: 81px;       
-    background-color: #630707;
-    border-radius: 25px;
+.bg-image {
+  display: none;
 }
 
-.desktop.text-wrapper {
-    position: absolute;
-    top: 855px;
-    left: 168px;
-    width: 457px;
-    font-family: "Instrument Serif-Regular", Helvetica;
-    font-weight: 400;
-    color: #ffffff;
-    font-size: 48px;
-    letter-spacing: 0;
-    line-height: normal;
+/* CAMERA AREA */
+.camera-bg-outer {
+  position: absolute;
+  top: 40px;
+  left: 40px;
+  width: 690px;
+  height: 450px;
+  background: #f4f4f4;
+  border-radius: 22px;
 }
 
-.desktop.rectangle-3 {
-    position: absolute;
-    top: 504px;
-    left: 449px;
-    width: 342px;
-    height: 81px;
-    background-color: #630707;
-    border-radius: 25px;
+.camera-bg-inner {
+  position: absolute;
+  top: 52px;
+  left: 52px;
+  width: 666px;
+  height: 426px;
+  background: #000;
+  border-radius: 18px;
+  overflow: hidden;
 }
 
-.desktop.text-wrapper-2 {
-    position: absolute;
-    top: 515px;
-    left: 553px;
-    width: 457px;
-    font-family: "Instrument Serif-Regular", Helvetica;
-    font-weight: 400;
-    color: #ffffff;
-    font-size: 48px;
-    letter-spacing: 0;
-    line-height: normal;
+#video,
+#capturedPhoto {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
 }
 
-.desktop.rectangle-4 {
-    position: absolute;
-    top: 715px;
-    left: 92px;
-    width: 699px;
-    height: 110px;
-    background-color: #187c8b9d;
-    border-radius: 25px;
+.placeholder-text {
+  width: 100%;
+  height: 100%;
 }
 
-.desktop.rectangle-5 {
-    position: absolute;
-    top: 749px;
-    left: 118px;
-    width: 190px;
-    height: 61px;
-    background-color: #ffdee2f7;
-    border-radius: 100px;
+/* BUTTON BASE */
+.btn {
+  border: none;
+  border-radius: 16px;
+  cursor: pointer;
+  font-family: "Instrument Serif", serif;
 }
 
-.desktop.text-wrapper-3 {
-    position: absolute;
-    top: 757px;
-    left: 181px;
-    font-family: "Jua-Regular", Helvetica;
-    font-weight: 400;
-    color: #70020f;
-    font-size: 36px;
-    letter-spacing: 0;
-    line-height: normal;
+.btn:hover {
+  transform: scale(1.02);
 }
 
-.desktop .rectangle-6 {
-    position: absolute;
-    top: 753px;
-    left: 317px;
-    width: 252px;
-    height: 58px;
-    background-color: #ffdee2f7;
-    border-radius: 100px;
+/* TOP BUTTONS */
+.btn-shoot,
+.btn-retake {
+  position: absolute;
+  top: 515px;
+  width: 335px;
+  height: 68px;
+  font-size: 34px;
 }
 
-.desktop.text-wrapper-4 {
-    left: 407px;
-    width: 100px;
-    position: absolute;
-    top: 762px;
-    font-family: "Jua-Regular", Helvetica;
-    font-weight: 400;
-    color: #70020f;
-    font-size: 36px;
-    letter-spacing: 0;
-    line-height: normal;
+.btn-shoot {
+  left: 40px;
+  background: #f1f1f1;
 }
 
-.desktop.rectangle-7 {
-    position: absolute;
-    top: 751px;
-    left: 576px;
-    width: 190px;
-    height: 61px;
-    background-color: #ffdee2f7;
-    border-radius: 100px;
+.btn-retake {
+  left: 395px;
+  background: #8b0000;
 }
 
-.desktop.text-wrapper-5 {
-    left: 639px;
-    position: absolute;
-    top: 762px;
-    font-family: "Jua-Regular", Helvetica;
-    font-weight: 400;
-    color: #70020f;
-    font-size: 36px;
-    letter-spacing: 0;
-    line-height: normal;
+.btn-text-dark {
+  color: #630707;
+  font-size: 34px;
 }
 
-.desktop.text-wrapper-6 {
-    top: 721px;
-    left: 355px;
-    width: 204px;
-    color: #70020f;
-    position: absolute;
-    font-family: "JejuGothic-Regular", Helvetica;
-    font-weight: 400;
-    font-size: 24px;
-    letter-spacing: 0;
-    line-height: normal;
-    white-space: nowrap;
-} 
-
-.desktop.rectangle-8 {
-    position: absolute;
-    top: 595px;
-    left: 92px;
-    width: 699px;
-    height: 110px;
-    background-color:#91b5e5;
-    border-radius: 25px;
+.btn-text-white {
+  color: white;
+  font-size: 34px;
 }
 
-.desktop.text-wrapper-7 {
-    top: 601px;
-    left: 340px;
-    width: 437px;
-    opacity: 0.9;
-    color: #000000;
-    position: absolute;
-    font-family: "JejuGothic-Regular", Helvetica;
-    font-weight: 400;
-    font-size: 24px;
-    letter-spacing: 0;
-    line-height: normal;
-    white-space: nowrap;
+/* FILTER BOX */
+.filter-area {
+  position: absolute;
+  top: 615px;
+  left: 40px;
+  width: 690px;
+  height: 108px;
+  background: #8fb1e2;
+  border-radius: 14px;
 }
 
-.desktop.rectangle-9 {
-    position: absolute;
-    top: 629px;
-    left: 118px;
-    width: 190px;
-    height: 61px;
-    background-color: #0e2a51f7;
-    border-radius: 100px;
-    }
-
-.desktop.b-w {
-    position: absolute;
-    top: 633px;
-    left: 160px;
-    font-family: "Jacques brancois Shadow-Regular", Helvetica;
-    font-weight: 400;
-    color: #ffffff;
-    font-size: 40px;
-    letter-spacing: 0;
-    line-height: normal;
-} 
-
-.desktop.rectangle-10 {
-    position: absolute;
-    top: 632px;
-    left: 317px;
-    width: 252px;
-    height: 58px;
-    background-color: #0e2a51f7;
-    border-radius: 100px;
-} 
-
-.desktop.text-wrapper-8 {
-    position: absolute;
-    top: 637px;
-    left: 340px;
-    width: 353px;
-    font-family: "Jacques Francois Shadow-Regular", Helvetica;
-    font-weight: 400;
-    color: #ffffff;
-    font-size: 36px;
-    letter-spacing: 0;
-    line-height: normal;
-} 
-
-.desktop .rectangle-11 {
-    position: absolute;
-    top: 629px;
-    left: 576px;
-    width: 190px;
-    height: 61px;
-    background-color: #0e2a51f7;
-    border-radius: 100px;
+.filter-title {
+  position: absolute;
+  top: 625px;
+  left: 270px;
+  font-size: 26px;
 }
 
-.desktop.text-wrapper-9 {
-    position: absolute;
-    top: 632px;
-    left: 617px;
-    font-family: "Jacques Francois Shadow-Regular", Helvetica;
-    font-weight: 400;
-    color: #ffffff;
-    font-size: 40px;
-    letter-spacing: 0;
-    line-height: normal;
+.filter-buttons {
+  position: absolute;
+  top: 655px;
+  left: 60px;
+  display: flex;
+  gap: 25px;
 }
 
-.desktop .img {
-    position: absolute;
-    top: 505px;
-    left: 92px;
-    width: 342px;
-    height: 80px;
-} 
-
-.desktop.text-wrapper-10 {
-    position: absolute;
-    top: 515px;
-    left: 214px;
-    width: 251px;
-    font-family: "Instrument Serif-Regular", Helvetica;
-    font-weight: 400;
-    color: #630707;
-    font-size: 48px;
-    letter-spacing: 0;
-    line-height: normal;
+.filter-btn {
+  width: 205px;
+  height: 50px;
+  border: none;
+  border-radius: 50px;
+  background: #16345f;
+  color: white;
+  font-size: 24px;
+  font-family: "Jacques Francois Shadow", serif;
+  cursor: pointer;
 }
 
-.desktop .rectangle-12 {
-    position: absolute;
-    top: 842px;
-    left: 449px;
-    width: 342px;
-    height: 81px;
+/* FRAME BOX */
+.frame-area {
+  position: absolute;
+  top: 745px;
+  left: 40px;
+  width: 690px;
+  height: 108px;
+  background: #e79a9a;
+  border-radius: 14px;
 }
 
-.desktop.text-wrapper-11 {
-    position: absolute;
-    top: 842px;
-    left: 564px;
-    font-family: "Instrument Serif-Regular", Helvetica;
-    font-weight: 400;
-    color: #630707;
-    font-size: 64px;
-    letter-spacing: 0;
-    line-height: normal;
-}
-.desktop .rectangle-13 {
-    position: absolute;
-    top: 89px;
-    left: 961px;
-    width: 353px;
-    height: 842px;
-    border-radius: 30px;
-    background: liner-gradient(180deg, rgba(15, 43, 82, 0.86) 13%, rgba(15, 43, 82, 0.8)100%); 
+.frame-title {
+  position: absolute;
+  top: 755px;
+  left: 285px;
+  font-size: 26px;
+  color: #5d0010;
 }
 
-.desktop .image {
-    position: absolute;
-    top: 117px;
-    left: 902px;
-    width: 297px;
-    height: 795px;
-    aspect-ratio: 0.37;
-    object-fit: cover;
+.frame-buttons {
+  position: absolute;
+  top: 785px;
+  left: 60px;
+  display: flex;
+  gap: 25px;
 }
 
-.desktop .rectangle-14 {
-    position: absolute;
-    top: 90px;
-    left: 91px;
-    width: 699px;
-    height: 398px;
-    background-color: #fffefe;
-    border-radius: 50px;
+.frame-btn {
+  width: 205px;
+  height: 50px;
+  border: none;
+  border-radius: 50px;
+  background: #f5d8dc;
+  color: #70020f;
+  font-size: 20px;
+  font-family: "Jua", sans-serif;
+  cursor: pointer;
 }
 
-.dekstop .rectangle-15 {
-    position: absolute;
-    top: 103px;
-    left: 102px;
-    width: 680px;
-    height: 371px;
-    background-color: #000000;
-    border-radius: 40px;
+/* BOTTOM BUTTONS */
+.btn-download,
+.btn-back {
+  position: absolute;
+  top: 880px;
+  width: 335px;
+  height: 68px;
+}
+
+.btn-download {
+  left: 40px;
+  background: #8b0000;
+}
+
+.btn-back {
+  left: 395px;
+  background: #f1f1f1;
+}
+
+.btn-text-back {
+  color: #630707;
+  font-size: 34px;
+}
+
+/* RIGHT PREVIEW */
+.preview-gradient {
+  position: absolute;
+  top: 40px;
+  right: 70px;
+  width: 335px;
+  height: 870px;
+  border-radius: 18px;
+  background: linear-gradient(180deg, #7d0000, #b15d5d);
+}
+
+.preview-image {
+  position: absolute;
+  top: 60px;
+  right: 90px;
+  width: 295px;
+  height: 820px;
+  z-index: 2;
+}
+
+#previewPlaceholder,
+#previewImg,
+#frameOverlay {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+#frameOverlay {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+}
+
+canvas {
+  display: none;
 }
