@@ -1,0 +1,162 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: Arial, sans-serif;
+    background: linear-gradient(135deg, #1a1a2e 0%, #16213e 100%);
+    min-height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    overflow: hidden;
+}
+
+.container {
+    position: relative;
+    width: 1920px;
+    height: 1080px;
+    background: linear-gradient(180deg, #4a5568 0%, #2d3748 100%);
+    overflow: hidden;
+    box-shadow: 0 20px 60px rgba(0, 0, 0, 0.5);
+}
+
+.bg-image {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.main-image {
+    position: absolute;
+    left: 1182px;
+    top: 166px;
+    width: 463px;
+    height: 688px;
+    border: 1px solid black;
+}
+
+.main-image img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.title {
+    position: absolute;
+    top: 278px;
+    left: 75px;
+    width: 513px;
+    height: 256px;;
+}
+
+.subtitle {
+    position: absolute;
+    left: 50%;
+    top: 427px;
+    margin-left: 450px;
+    transform: translate(-50%, -50%);
+    font-family: 'Irish Grover', cursive;
+    font-size: 48px;
+    color: white;
+    text-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+    white-space: nowrap;
+    text-align: center;
+}
+
+.booth-text {
+    position: absolute;
+    left: 414px;
+    top: 516px;
+    width: 354px;
+    height: 127px;
+}
+
+.booth2-text {
+    position: absolute;
+    left: 404px;
+    top: 519px;
+    width: 361px;
+    height: 130px;
+}
+
+.question-box {
+    position: absolute;
+    left: 1231px;
+    top: 475px;
+    width: 368px;
+    min-height: 103px;
+    padding: 15px;
+    background: rgb(43, 42, 36, 0.46);
+    
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    
+    text-align: center;
+    flex-wrap: wrap; 
+    word-break: keep-all;
+    line-height: 1.5; 
+
+    font-family: 'Inknut Antiqua', serif;
+    font-size: 24px; 
+    color: white;
+    text-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+}
+
+.input-box {
+    position: absolute;
+    left: 1238px;
+    top: 612px;
+    width: 351px;
+    height: 65px;
+    background: rgb(242, 118, 118, 0.34);
+    border-radius: 30px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 0 30px;
+}
+
+#answer-input {
+    width: 100%;
+    background: transparent;
+    border: none;
+    outline: none;
+    color: white;
+    font-size: 24px;
+    text-align: center;
+    font-family: 'Inknut Antiqua', serif;
+}
+
+#answer-input::placeholder {
+    color: rgba(255, 255, 255, 0.6);
+}
+
+.unlock-btn {
+    position: absolute;
+    left: 1238px;
+    top: 716px;
+    width: 351px;
+    height: 69px;
+    background: rgba(109, 10, 10, 0.95);
+    border-radius: 30px;
+    border: none;
+    font-family: 'Inknut Antiqua', serif;
+    font-size: 24px;
+    color: white;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.unlock-btn:hover {
+    background: rgba(139, 10, 10, 0.95);
+    transform: scale(1.05);
+}
+
+.unlock-btn:active {
+    transform: scale(0.95);
+}

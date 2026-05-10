@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Photo Booth Dashboard</title>
+
+    <!-- GOOGLE FONT -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
+    <link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Jua&family=Jacques+Francois+Shadow&family=Jeju+Gothic&display=swap" rel="stylesheet">
+
+    <!-- CSS -->
+    <link rel="stylesheet" href="nextPurab.css">
+</head>
+
+<body>
+
+<div class="container">
+
+    <div class="main-panel">
+
+        <!-- PANEL -->
+        <div class="panel-bg-outer"></div>
+        <div class="panel-bg-inner"></div>
+
+        <!-- DOWNLOAD -->
+        <button class="btn btn-download" id="downloadBtn" disabled>
+            <span class="btn-text-white">DOWNLOAD</span>
+        </button>
+
+        <!-- RETAKE -->
+        <button class="btn btn-retake" id="retakeBtn" disabled>
+            <span class="btn-text-white">RETAKE</span>
+        </button>
+
+        <!-- FRAME -->
+        <div class="frame-area" id="frameArea"></div>
+
+        <p class="frame-title">🎨 choose frame</p>
+
+        <div class="frame-buttons">
+
+            <button class="frame-btn frame-btn-red active"
+            data-frame="red">
+                RED
+            </button>
+
+            <button class="frame-btn frame-btn-pink"
+            data-frame="pink">
+                PINK
+            </button>
+
+            <button class="frame-btn frame-btn-blue"
+            data-frame="blue">
+                BLUE
+            </button>
+
+        </div>
+
+         <!-- FILTER -->
+        <div class="filter-area"></div>
+
+        <p class="filter-title">🖌️ choose filter</p>
+
+        <div class="filter-buttons">
+
+            <button class="filter-btn filter-btn-bw"
+            data-filter="bw">
+                B&W
+            </button>
+
+            <button class="filter-btn filter-btn-vintage"
+            data-filter="vintage">
+                VINTAGE
+            </button>
+
+            <button class="filter-btn filter-btn-none active"
+            data-filter="none">
+                NON
+            </button>
+
+        </div>
+        
+        <!-- SHOOT -->
+        <button class="btn btn-shoot" id="shootBtn">
+            <span class="btn-text-dark">SHOOT</span>
+        </button>
+
+        <!-- BACK -->
+        <button class="btn btn-back" id="backBtn">
+            <span class="btn-text-back">BACK</span>
+        </button>
+
+        <!-- PREVIEW -->
+        <div class="preview-gradient"></div>
+
+        <div class="preview-image">
+
+            
+            <!-- PLACEHOLDER -->
+            <div id="previewPlaceholder"
+            style="
+            width:100%;
+            height:100%;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            display:flex;
+            align-items:center;
+            justify-content:center;
+            color:white;
+            font-size:18px;">
+                Preview
+            </div>
+
+            
+            <img id="previewImg" style="display:none;">
+
+            <!-- TEMPLATE STRIP -->
+            <img id="frameOverlay" src="Frame Red.jpeg" >  
+
+        </div> 
+
+        <!-- CAMERA -->
+        <div class="camera-bg-outer"></div>
+
+        <div class="camera-bg-inner">
+
+            <video id="video"
+            autoplay
+            playsinline
+            style="display:none;">
+            </video>
+
+            <img id="capturedPhoto"
+            style="display:none;">
+
+            <div class="placeholder-text"
+            id="placeholder">
+
+            </div>
+
+        </div>
+
+        <!-- CANVAS -->
+        <canvas id="canvas"></canvas>
+
+    </div>
+
+</div>
+
+<!-- JS -->
+<script src="nextPie.js" ></script>
+
+</body>
+</html>
