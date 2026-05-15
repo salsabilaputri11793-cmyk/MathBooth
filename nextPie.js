@@ -222,7 +222,7 @@ downloadBtn.addEventListener('click', () => {
 // Handle back button
 backBtn.addEventListener('click', () => {
     // Kembali ke halaman kuis matematika (index.html)
-    window.location.href = "index.html"; 
+    window.location.href = "login.html"; 
 });
 
 // Frame selection

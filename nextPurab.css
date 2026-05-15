@@ -73,12 +73,18 @@ body {
 }
 
 /* PLACEHOLDER */
-.placeholder-text {
-    width: 100%;
-    height: 100%;
-    display: flex;
-    justify-content: center;
-    align-items: center;
+.placeholder-text { 
+    position: absolute; 
+    inset: 0; 
+    width: 100%; 
+    height: 100%; 
+    display: flex; 
+    justify-content: center; 
+    align-items: center; 
+    color: white; 
+    font-size: 100px; 
+    text-shadow: 4px 4px 15px rgba(0,0,0,0.9); /* Bayangan biar angkanya jelas banget */
+    z-index: 50; /* Memaksa timer muncul paling depan */
 }
 
 /* SHOOT BUTTON */

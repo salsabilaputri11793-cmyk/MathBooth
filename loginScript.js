@@ -23,29 +23,30 @@ function generateQuestion() {
     }
 
     document.getElementById('quiz-question').textContent = questionText;
-    document.getElementById('answer-input').value = "";
+    
+    // BIKIN KURSOR LANGSUNG AKTIF DI KOTAK INPUT
+    const answerInput = document.getElementById('answer-input');
+    answerInput.value = "";
+    answerInput.focus(); 
+    
     document.getElementById('msg').textContent = "";
 }
 
-
 function unlock() {
-    // PENTING: Baris ini HARUS ada di dalam fungsi unlock(), bukan di luarnya!
     const answerInput = document.getElementById("answer-input").value.trim();
     const msgEl = document.getElementById("msg");
 
-    // Cek apakah kotak input benar-benar kosong
     if (answerInput === "") {
         msgEl.textContent = "Masukkan angka terlebih dahulu!";
-        msgEl.style.color = "white"; // Ubah jadi putih
+        msgEl.style.color = "white"; 
         return;
     }
 
-    // Ubah teks menjadi angka
     const answer = parseInt(answerInput);
 
     if (answer === currentAnswer) {
         msgEl.textContent = "BERHASIL!";
-        msgEl.style.color = "white"; // Ubah jadi putih
+        msgEl.style.color = "white"; 
         
         setTimeout(() => {
             window.location.href = "next.html"; 
@@ -53,7 +54,7 @@ function unlock() {
         
     } else {
         msgEl.textContent = "JAWABAN SALAH!";
-        msgEl.style.color = "white"; // Ubah jadi putih
+        msgEl.style.color = "white"; 
         
         setTimeout(() => {
             generateQuestion();
@@ -61,4 +62,14 @@ function unlock() {
     }
 }
 
-document.addEventListener('DOMContentLoaded', generateQuestion);
+document.addEventListener('DOMContentLoaded', () => {
+    generateQuestion();
+    
+    const answerInput = document.getElementById("answer-input");
+    answerInput.addEventListener("keypress", function(event) {
+        if (event.key === "Enter") {
+            event.preventDefault();
+            unlock();
+        }
+    });
+});
