@@ -41,9 +41,9 @@ const frameColors = {
 
 // TEMPLATE FRAME
 const frameTemplates = {
-  red: "Frame Red.jpeg",
-  pink: "Frame Pink.jpeg",
-  blue: "Frame Blue.jpeg",
+  red: "frame merah.jpeg",
+  pink: "frame Pink.jpeg",
+  blue: "frame biru.jpeg",
 };
 
 // Update frame color & overlay
