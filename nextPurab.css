@@ -1,295 +1,296 @@
 * {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
 }
 
 body {
-    font-family: "Jeju Gothic", sans-serif;
-    background: #f5f5f5;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    min-height: 100vh;
+  font-family: "Jeju Gothic", sans-serif;
+  background: #f5f5f5;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 100vh;
 }
 
 .container {
-    width: 100%;
-    max-width: 1440px;
-    padding: 20px;
+  width: 100%;
+  max-width: 1440px;
+  padding: 20px;
 }
 
 .main-panel {
-    position: relative;
-    width: 100%;
-    min-height: 950px;
-    background: #e2ceb1;
-    border-radius: 40px;
-    overflow: hidden;
-    padding: 30px;
+  position: relative;
+  width: 100%;
+  min-height: 950px;
+  background: #e2ceb1;
+  border-radius: 40px;
+  overflow: hidden;
+  padding: 30px;
 }
 
 /* BACKGROUND */
 .bg-image {
-    position: absolute;
-    inset: 0;
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-    opacity: 0.15;
-    z-index: 0;
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  opacity: 1;
+  z-index: 0;
 }
 
 /* LEFT CAMERA PANEL */
 .camera-bg-outer {
-    position: absolute;
-    top: 80px;
-    left: 60px;
-    width: 700px;
-    height: 400px;
-    background: #fff;
-    border-radius: 40px;
-    z-index: 2;
+  position: absolute;
+  top: 80px;
+  left: 60px;
+  width: 700px;
+  height: 400px;
+  background: #fff;
+  border-radius: 40px;
+  z-index: 2;
 }
 
 .camera-bg-inner {
-    position: absolute;
-    top: 95px;
-    left: 75px;
-    width: 670px;
-    height: 370px;
-    background: #111;
-    border-radius: 30px;
-    z-index: 3;
-    overflow: hidden;
+  position: absolute;
+  top: 95px;
+  left: 75px;
+  width: 670px;
+  height: 370px;
+  background: #111;
+  border-radius: 30px;
+  z-index: 3;
+  overflow: hidden;
 }
 
 /* VIDEO + PHOTO */
 #video,
 #capturedPhoto {
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
 }
 
 /* PLACEHOLDER */
-.placeholder-text { 
-    position: absolute; 
-    inset: 0; 
-    width: 100%; 
-    height: 100%; 
-    display: flex; 
-    justify-content: center; 
-    align-items: center; 
-    color: white; 
-    font-size: 100px; 
-    text-shadow: 4px 4px 15px rgba(0,0,0,0.9); /* Bayangan biar angkanya jelas banget */
-    z-index: 50; /* Memaksa timer muncul paling depan */
+.placeholder-text {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  color: white;
+  font-size: 100px;
+  text-shadow: 4px 4px 15px rgba(0, 0, 0, 0.9); /* Bayangan biar angkanya jelas banget */
+  z-index: 50; /* Memaksa timer muncul paling depan */
 }
 
 /* SHOOT BUTTON */
 .btn {
-    border: none;
-    cursor: pointer;
-    border-radius: 25px;
-    transition: 0.2s;
+  border: none;
+  cursor: pointer;
+  border-radius: 25px;
+  transition: 0.2s;
 }
 
 .btn:hover {
-    transform: scale(1.03);
+  transform: scale(1.03);
 }
 
 /* SHOOT */
 .btn-shoot {
-    position: absolute;
-    top: 510px;
-    left: 430px;
-    width: 340px;
-    height: 80px;
-    background: #630707;
-    z-index: 5;
+  position: absolute;
+  top: 510px;
+  left: 430px;
+  width: 340px;
+  height: 80px;
+  background: #630707;
+  z-index: 5;
 }
 
 .btn-text-dark,
 .btn-text-white {
-    font-family: "Instrument Serif", serif;
-    font-size: 42px;
-    color: white;
+  font-family: "Instrument Serif", serif;
+  font-size: 42px;
+  color: white;
 }
 
 /* BACK */
 .btn-back {
-    position: absolute;
-    top: 510px;
-    left: 70px;
-    width: 340px;
-    height: 80px;
-    background: #f4d8d8;
+  position: absolute;
+  top: 510px;
+  left: 70px;
+  width: 340px;
+  height: 80px;
+  background: #f4d8d8;
 }
 
 .btn-text-back {
-    font-family: "Instrument Serif", serif;
-    font-size: 42px;
-    color: #630707;
+  font-family: "Instrument Serif", serif;
+  font-size: 42px;
+  color: #630707;
 }
 
 /* FILTER AREA */
 .filter-area {
-    position: absolute;
-    top: 600px;
-    left: 60px;
-    width: 700px;
-    height: 110px;
-    background: #91b5e5;
-    border-radius: 25px;
+  position: absolute;
+  top: 600px;
+  left: 60px;
+  width: 700px;
+  height: 110px;
+  background: #91b5e5;
+  border-radius: 25px;
 }
 
 .filter-title {
-    position: absolute;
-    top: 610px;
-    left: 290px;
-    font-size: 24px;
+  position: absolute;
+  top: 610px;
+  left: 290px;
+  font-size: 24px;
 }
 
 .filter-buttons {
-    position: absolute;
-    top: 635px;
-    left: 90px;
-    display: flex;
-    gap: 15px;
+  position: absolute;
+  top: 635px;
+  left: 90px;
+  display: flex;
+  gap: 15px;
 }
 
 .filter-btn {
-    width: 180px;
-    height: 55px;
-    border-radius: 100px;
-    border: none;
-    font-size: 28px;
-    font-family: "Jacques Francois Shadow", serif;
-    cursor: pointer;
+  width: 180px;
+  height: 55px;
+  border-radius: 100px;
+  border: none;
+  font-size: 28px;
+  font-family: "Jacques Francois Shadow", serif;
+  cursor: pointer;
 }
 
 .filter-btn-bw,
 .filter-btn-vintage,
 .filter-btn-none {
-    background: #0e2a51;
-    color: white;
+  background: #0e2a51;
+  color: white;
 }
 
 /* FRAME AREA */
 .frame-area {
-    position: absolute;
-    top: 730px;
-    left: 60px;
-    width: 700px;
-    height: 110px;
-    background: rgba(24, 124, 139, 0.6);
-    border-radius: 25px;
+  position: absolute;
+  top: 730px;
+  left: 60px;
+  width: 700px;
+  height: 110px;
+  background: rgba(24, 124, 139, 0.6);
+  border-radius: 25px;
 }
 
 .frame-title {
-    position: absolute;
-    top: 740px;
-    left: 290px;
-    font-size: 24px;
-    color: #70020f;
+  position: absolute;
+  top: 740px;
+  left: 290px;
+  font-size: 24px;
+  color: #70020f;
 }
 
 .frame-buttons {
-    position: absolute;
-    top: 765px;
-    left: 90px;
-    display: flex;
-    gap: 15px;
+  position: absolute;
+  top: 765px;
+  left: 90px;
+  display: flex;
+  gap: 15px;
 }
 
 .frame-btn {
-    width: 180px;
-    height: 55px;
-    border-radius: 100px;
-    border: none;
-    font-size: 28px;
-    font-family: "Jua", sans-serif;
-    cursor: pointer;
-    background: #ffdce0;
-    color: #70020f;
+  width: 180px;
+  height: 55px;
+  border-radius: 100px;
+  border: none;
+  font-size: 28px;
+  font-family: "Jua", sans-serif;
+  cursor: pointer;
+  background: #ffdce0;
+  color: #70020f;
 }
 
 /* DOWNLOAD + RETAKE */
 .btn-download {
-    position: absolute;
-    top: 860px;
-    left: 60px;
-    width: 340px;
-    height: 80px;
-    background: #630707;
+  position: absolute;
+  top: 860px;
+  left: 60px;
+  width: 340px;
+  height: 80px;
+  background: #630707;
 }
 
 .btn-retake {
-    position: absolute;
-    top: 860px;
-    left: 430px;
-    width: 340px;
-    height: 80px;
-    background: #f4d8d8;
+  position: absolute;
+  top: 860px;
+  left: 430px;
+  width: 340px;
+  height: 80px;
+  background: #f4d8d8;
 }
 
 .btn-retake .btn-text-white {
-    color: #630707;
+  color: #630707;
 }
 
 /* RIGHT PREVIEW */
 .preview-gradient {
-    position: absolute;
-    top: 60px;
-    right: 70px;
-    width: 360px;
-    height: 860px;
-    border-radius: 30px;
-    background: linear-gradient(
-        180deg,
-        rgba(15, 43, 82, 0.9),
-        rgba(15, 43, 82, 0.75)
-    );
+  position: absolute;
+  top: 60px;
+  right: 70px;
+  width: 360px;
+  height: 860px;
+  border-radius: 30px;
+  background: linear-gradient(
+    180deg,
+    rgba(15, 43, 82, 0.9),
+    rgba(15, 43, 82, 0.75)
+  );
 }
 
 .preview-image {
-    position: absolute;
-    top: 90px;
-    right: 100px;
-    width: 300px;
-    height: 790px;
-    z-index: 10;
+  position: absolute;
+  top: 90px;
+  right: 100px;
+  width: 300px;
+  height: 790px;
+  z-index: 10;
 }
 
 #previewImg,
 #frameOverlay {
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
 }
 
 #frameOverlay {
-    position: absolute;
-    inset: 0;
-    pointer-events: none;
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
 }
 
 /* HIDE CANVAS */
 canvas {
-    display: none;
+  display: none;
 }
 
 /* TIMER COUNTDOWN */
 .countdown-timer {
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    font-size: 150px;
-    color: white;
-    font-family: "Instrument Serif", serif; /* Menyesuaikan font yang sudah kamu pakai */
-    text-shadow: 4px 4px 15px rgba(0, 0, 0, 0.8);
-    z-index: 10; /* Pastikan berada di atas video */
-    pointer-events: none; /* Agar tidak mengganggu klik di area kamera */
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  font-size: 150px;
+  color: white;
+  font-family:
+    "Instrument Serif", serif; /* Menyesuaikan font yang sudah kamu pakai */
+  text-shadow: 4px 4px 15px rgba(0, 0, 0, 0.8);
+  z-index: 10; /* Pastikan berada di atas video */
+  pointer-events: none; /* Agar tidak mengganggu klik di area kamera */
 }
