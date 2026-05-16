@@ -358,16 +358,6 @@ downloadBtn.addEventListener("click", () => {
 backBtn.addEventListener('click', () => {
     // Kembali ke halaman kuis matematika (index.html)
     window.location.href = "index.html"; 
-=======
-backBtn.addEventListener("click", () => {
-  stopCamera();
-  capturedImage = null;
-  capturedPhoto.style.display = "none";
-  placeholder.style.display = "flex";
-  placeholder.textContent = "Tekan SHOOT untuk mulai";
-  retakeBtn.disabled = true;
-  downloadBtn.disabled = true;
->>>>>>> c264017 (bebaslah)
 });
 
 // Frame selection
