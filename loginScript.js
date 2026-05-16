@@ -24,7 +24,6 @@ function generateQuestion() {
 
     document.getElementById('quiz-question').textContent = questionText;
     
-    // BIKIN KURSOR LANGSUNG AKTIF DI KOTAK INPUT
     const answerInput = document.getElementById('answer-input');
     answerInput.value = "";
     answerInput.focus(); 
