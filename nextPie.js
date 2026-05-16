@@ -378,7 +378,7 @@ document.querySelectorAll(".filter-btn").forEach((btn) => {
     e.target.classList.add("active");
 
     currentFilter = e.target.dataset.filter;
-
+    
     updateLiveFilter();
   });
 });
