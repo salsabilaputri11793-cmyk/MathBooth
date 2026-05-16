@@ -17,7 +17,7 @@ const backBtn = document.getElementById('backBtn');
 const frameArea = document.getElementById('frameArea');
 const frameOverlay = document.getElementById('frameOverlay');
 
-// Elemen baru dari HTML-mu
+// Elemen baru dari HTML
 const previewImg = document.getElementById('previewImg');
 const previewPlaceholder = document.getElementById('previewPlaceholder');
 
@@ -35,7 +35,7 @@ const frameColors = {
     blue: 'rgba(145, 181, 230, 0.62)'
 };
 
-// TEMPLATE FRAME (Pastikan huruf besar/kecilnya sama dengan nama file gambar di folder)
+// TEMPLATE FRAME 
 const frameTemplates = {
     red: "Frame Red.jpeg",
     pink: "Frame Pink.jpeg",
@@ -63,7 +63,7 @@ async function startCamera() {
 
         video.srcObject = stream;
         video.style.display = 'block';
-        video.style.transform = 'scaleX(-1)'; // Anti-mirror untuk live video
+        video.style.transform = 'scaleX(-1)'; 
         
         placeholder.style.display = 'none';
         capturedPhoto.style.display = 'none';
@@ -95,7 +95,7 @@ function updateLiveFilter() {
         cssFilter = 'sepia(60%) contrast(110%) brightness(90%)';
     }
 
-    // Terapkan efeknya ke video langsung, hasil foto, dan preview di dalam frame
+    
     video.style.filter = cssFilter;
     capturedPhoto.style.filter = cssFilter;
     if (previewImg) {
@@ -103,7 +103,7 @@ function updateLiveFilter() {
     }
 }
 
-// Capture photo (Proses Jepret)
+// Capture photo 
 function capturePhoto() {
     if (!video.videoWidth || !video.videoHeight) {
         alert('Tunggu sebentar, kamera sedang dimuat...');
@@ -118,7 +118,7 @@ function capturePhoto() {
     ctx.translate(canvas.width, 0);
     ctx.scale(-1, 1);
 
-    // Tempelkan filter ke canvas saat dicetak agar tersimpan di foto
+   // filter 
     if (currentFilter === 'bw') {
         ctx.filter = 'grayscale(100%)';
     } else if (currentFilter === 'vintage') {
@@ -141,7 +141,6 @@ function capturePhoto() {
     capturedPhoto.style.display = 'block';
     capturedPhoto.style.transform = 'none'; 
 
-    // Tampilkan di area FRAME & Sembunyikan tulisan "Preview"
     if (previewImg && previewPlaceholder) {
         previewImg.src = capturedImage;
         previewImg.style.display = 'block';
@@ -255,3 +254,5 @@ updateFrameColor();
 window.addEventListener('beforeunload', () => {
     stopCamera();
 });
+
+
