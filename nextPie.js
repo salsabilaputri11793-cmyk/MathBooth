@@ -2,7 +2,11 @@
 let currentFilter = "none";
 let currentFrame = "red";
 let isCameraActive = false;
-let capturedImage = null;
+
+// UBAH INI
+let capturedImages = [];
+let currentSlot = 0;
+
 let stream = null;
 
 // Elements dari HTML
@@ -26,7 +30,7 @@ window.addEventListener("load", startCamera);
 
 // Timer
 const countdownTimer = document.getElementById("countdownTimer");
-let timerInterval; // Untuk menyimpan interval waktu
+let timerInterval;
 
 // Frame colors
 const frameColors = {
@@ -45,8 +49,14 @@ const frameTemplates = {
 // Update frame color & overlay
 function updateFrameColor() {
   frameArea.style.backgroundColor = frameColors[currentFrame];
+
   if (frameOverlay) {
     frameOverlay.src = frameTemplates[currentFrame];
+  }
+
+  // render ulang preview kalau user ganti frame
+  if (capturedImages.length > 0) {
+    renderPhotoStrip();
   }
 }
 
@@ -57,7 +67,7 @@ async function startCamera() {
       video: {
         width: { ideal: 1280 },
         height: { ideal: 720 },
-        facingMode: "user", // Kamera depan
+        facingMode: "user",
       },
     });
 
@@ -67,9 +77,13 @@ async function startCamera() {
 
     placeholder.style.display = "none";
     capturedPhoto.style.display = "none";
+
     isCameraActive = true;
+
   } catch (err) {
+
     console.error("Error accessing camera:", err);
+
     placeholder.textContent =
       "Tidak dapat mengakses kamera. Pastikan memberikan izin kamera di browser.";
   }
@@ -77,18 +91,23 @@ async function startCamera() {
 
 // Stop camera
 function stopCamera() {
+
   if (stream) {
     stream.getTracks().forEach((track) => track.stop());
     stream = null;
   }
+
   video.srcObject = null;
   video.style.display = "none";
+
   isCameraActive = false;
 }
 
 // Fungsi untuk Update Live Filter
 function updateLiveFilter() {
+
   let cssFilter = "none";
+
   if (currentFilter === "bw") {
     cssFilter = "grayscale(100%)";
   } else if (currentFilter === "vintage") {
@@ -97,6 +116,7 @@ function updateLiveFilter() {
 
   video.style.filter = cssFilter;
   capturedPhoto.style.filter = cssFilter;
+
   if (previewImg) {
     previewImg.style.filter = cssFilter;
   }
@@ -104,6 +124,13 @@ function updateLiveFilter() {
 
 // Capture photo
 function capturePhoto() {
+
+  // BATAS 3 FOTO
+  if (currentSlot >= 3) {
+    alert("3 foto sudah penuh!");
+    return;
+  }
+
   if (!video.videoWidth || !video.videoHeight) {
     alert("Tunggu sebentar, kamera sedang dimuat...");
     return;
@@ -111,9 +138,10 @@ function capturePhoto() {
 
   canvas.width = video.videoWidth;
   canvas.height = video.videoHeight;
+
   const ctx = canvas.getContext("2d");
 
-  // Anti-mirror untuk kanvas sebelum dicetak
+  // Anti-mirror
   ctx.translate(canvas.width, 0);
   ctx.scale(-1, 1);
 
@@ -129,131 +157,237 @@ function capturePhoto() {
   // Cetak gambar
   ctx.drawImage(video, 0, 0);
 
-  // Kembalikan ke normal
+  // Reset transform
   ctx.setTransform(1, 0, 0, 1, 0, 0);
 
-  // Simpan data gambar
-  capturedImage = canvas.toDataURL("image/png");
+  // SIMPAN FOTO
+  const photoData = canvas.toDataURL("image/png");
 
-  // Tampilkan di area utama
-  capturedPhoto.src = capturedImage;
-  capturedPhoto.style.display = "block";
-  capturedPhoto.style.transform = "none";
+  capturedImages.push(photoData);
 
-  if (previewImg && previewPlaceholder) {
-    previewImg.src = capturedImage;
-    previewImg.style.display = "block";
-    previewPlaceholder.style.display = "none";
-  }
+  currentSlot++;
 
-  stopCamera();
+  // Render photostrip
+  renderPhotoStrip();
 
   retakeBtn.disabled = false;
+
+  // Aktif kalau sudah ada minimal 1 foto
   downloadBtn.disabled = false;
+
+  // Kalau sudah 3 foto matikan kamera
+  if (currentSlot >= 3) {
+    stopCamera();
+  }
 }
 
-// Fungsi hitungan mundur (Timer)
+// RENDER PHOTO STRIP
+function renderPhotoStrip() {
+
+  const stripCanvas = document.createElement("canvas");
+  const ctx = stripCanvas.getContext("2d");
+
+  stripCanvas.width = 400;
+  stripCanvas.height = 1200;
+
+  // POSISI SLOT FOTO
+  const slots = [
+    { x: 60, y: 90, w: 280, h: 280 },
+    { x: 60, y: 430, w: 280, h: 280 },
+    { x: 60, y: 770, w: 280, h: 280 },
+  ];
+
+  let loadedCount = 0;
+
+  capturedImages.forEach((src, index) => {
+
+    const img = new Image();
+
+    img.src = src;
+
+    img.onload = () => {
+
+      const s = slots[index];
+
+      ctx.drawImage(
+        img,
+        s.x,
+        s.y,
+        s.w,
+        s.h
+      );
+
+      loadedCount++;
+
+      // kalau semua foto selesai dimasukin
+      if (loadedCount === capturedImages.length) {
+
+        const frameImg = new Image();
+
+        frameImg.src = frameTemplates[currentFrame];
+
+        frameImg.onload = () => {
+
+          ctx.drawImage(
+            frameImg,
+            0,
+            0,
+            stripCanvas.width,
+            stripCanvas.height
+          );
+
+          const finalImage =
+            stripCanvas.toDataURL("image/png");
+
+          previewImg.src = finalImage;
+
+          previewImg.style.display = "block";
+
+          previewPlaceholder.style.display = "none";
+
+          // simpan hasil final buat download
+          downloadBtn.dataset.image = finalImage;
+        };
+      }
+    };
+  });
+}
+
+// Fungsi hitungan mundur
 function startCountdown(seconds) {
-  // Nonaktifkan tombol sementara agar user tidak spam klik saat timer berjalan
+
   shootBtn.disabled = true;
 
-  // Tampilkan timer dan set angka awalnya
   countdownTimer.style.display = "block";
   countdownTimer.textContent = seconds;
 
   timerInterval = setInterval(() => {
+
     seconds--;
+
     if (seconds > 0) {
-      // Update angka di layar
+
       countdownTimer.textContent = seconds;
+
     } else {
-      // Jika timer habis (0)
+
       clearInterval(timerInterval);
-      countdownTimer.style.display = "none"; // Sembunyikan angka timer
 
-      capturePhoto(); // Ambil foto
+      countdownTimer.style.display = "none";
 
-      shootBtn.disabled = false; // Aktifkan tombol kembali
+      capturePhoto();
+
+      shootBtn.disabled = false;
     }
-  }, 1000); // 1000 ms = 1 detik
+
+  }, 1000);
 }
 
 // Handle shoot button
 shootBtn.addEventListener("click", () => {
+
   if (isCameraActive) {
-    // PANGGIL TIMER DI SINI (Misalnya 3 detik)
+
     startCountdown(3);
+
   } else {
+
     startCamera();
+
     capturedPhoto.style.display = "none";
   }
 });
 
 // Handle retake button
 retakeBtn.addEventListener("click", () => {
-  capturedImage = null;
+
+  // RESET SEMUA
+  capturedImages = [];
+  currentSlot = 0;
+
   capturedPhoto.style.display = "none";
 
-  // Kosongkan frame dan munculkan tulisan "Preview" lagi
   if (previewImg && previewPlaceholder) {
+
     previewImg.src = "";
+
     previewImg.style.display = "none";
+
     previewPlaceholder.style.display = "flex";
   }
 
   placeholder.style.display = "none";
+
   retakeBtn.disabled = true;
+
   downloadBtn.disabled = true;
+
+  delete downloadBtn.dataset.image;
 
   startCamera();
 });
 
 // Handle download button
 downloadBtn.addEventListener("click", () => {
-  if (capturedImage) {
+
+  if (downloadBtn.dataset.image) {
+
     const link = document.createElement("a");
-    link.href = capturedImage;
-    link.download = `photobooth-${Date.now()}.png`;
+
+    link.href = downloadBtn.dataset.image;
+
+    link.download =
+      `photobooth-${Date.now()}.png`;
+
     link.click();
   }
 });
 
 // Handle back button
 backBtn.addEventListener("click", () => {
-  // Kembali ke halaman kuis matematika (index.html)
+
   window.location.href = "index.html";
 });
 
 // Frame selection
 document.querySelectorAll(".frame-btn").forEach((btn) => {
+
   btn.addEventListener("click", (e) => {
+
     document
       .querySelectorAll(".frame-btn")
       .forEach((b) => b.classList.remove("active"));
+
     e.target.classList.add("active");
+
     currentFrame = e.target.dataset.frame;
+
     updateFrameColor();
   });
 });
 
 // Filter selection
 document.querySelectorAll(".filter-btn").forEach((btn) => {
+
   btn.addEventListener("click", (e) => {
+
     document
       .querySelectorAll(".filter-btn")
       .forEach((b) => b.classList.remove("active"));
+
     e.target.classList.add("active");
+
     currentFilter = e.target.dataset.filter;
 
-    // Panggil fungsi live filter setiap kali tombol filter ditekan
     updateLiveFilter();
   });
 });
 
-// Initialize frame color saat pertama dibuka
+// Initialize
 updateFrameColor();
 
-// Matikan kamera kalau pengguna menutup tab/browser
+// Matikan kamera kalau tab ditutup
 window.addEventListener("beforeunload", () => {
+
   stopCamera();
 });
