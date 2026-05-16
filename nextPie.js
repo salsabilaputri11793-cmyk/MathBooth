@@ -124,10 +124,6 @@ function updateLiveFilter() {
 
 // Capture photo
 function capturePhoto() {
-<<<<<<< HEAD
-=======
-
->>>>>>> 90070b720a04038431508cf72882a1ded5f7deaf
   // BATAS 3 FOTO
   if (currentSlot >= 3) {
     alert("3 foto sudah penuh!");
@@ -186,10 +182,6 @@ function capturePhoto() {
 
 // RENDER PHOTO STRIP
 function renderPhotoStrip() {
-<<<<<<< HEAD
-=======
-
->>>>>>> 90070b720a04038431508cf72882a1ded5f7deaf
   const stripCanvas = document.createElement("canvas");
   const ctx = stripCanvas.getContext("2d");
 
@@ -206,20 +198,11 @@ function renderPhotoStrip() {
   let loadedCount = 0;
 
   capturedImages.forEach((src, index) => {
-<<<<<<< HEAD
-=======
-
->>>>>>> 90070b720a04038431508cf72882a1ded5f7deaf
     const img = new Image();
 
     img.src = src;
 
     img.onload = () => {
-<<<<<<< HEAD
-      const s = slots[index];
-
-      ctx.drawImage(img, s.x, s.y, s.w, s.h);
-=======
 
       const s = slots[index];
 
@@ -230,26 +213,16 @@ function renderPhotoStrip() {
         s.w,
         s.h
       );
->>>>>>> 90070b720a04038431508cf72882a1ded5f7deaf
 
       loadedCount++;
 
       // kalau semua foto selesai dimasukin
       if (loadedCount === capturedImages.length) {
-<<<<<<< HEAD
-=======
-
->>>>>>> 90070b720a04038431508cf72882a1ded5f7deaf
         const frameImg = new Image();
 
         frameImg.src = frameTemplates[currentFrame];
 
         frameImg.onload = () => {
-<<<<<<< HEAD
-          ctx.drawImage(frameImg, 0, 0, stripCanvas.width, stripCanvas.height);
-
-          const finalImage = stripCanvas.toDataURL("image/png");
-=======
 
           ctx.drawImage(
             frameImg,
@@ -261,7 +234,6 @@ function renderPhotoStrip() {
 
           const finalImage =
             stripCanvas.toDataURL("image/png");
->>>>>>> 90070b720a04038431508cf72882a1ded5f7deaf
 
           previewImg.src = finalImage;
 
@@ -279,10 +251,6 @@ function renderPhotoStrip() {
 
 // Fungsi hitungan mundur
 function startCountdown(seconds) {
-<<<<<<< HEAD
-=======
-
->>>>>>> 90070b720a04038431508cf72882a1ded5f7deaf
   shootBtn.disabled = true;
 
   countdownTimer.style.display = "block";
@@ -293,17 +261,9 @@ function startCountdown(seconds) {
     seconds--;
 
     if (seconds > 0) {
-<<<<<<< HEAD
-=======
-
->>>>>>> 90070b720a04038431508cf72882a1ded5f7deaf
       countdownTimer.textContent = seconds;
 
     } else {
-<<<<<<< HEAD
-=======
-
->>>>>>> 90070b720a04038431508cf72882a1ded5f7deaf
       clearInterval(timerInterval);
 
       countdownTimer.style.display = "none";
@@ -312,10 +272,6 @@ function startCountdown(seconds) {
 
       shootBtn.disabled = false;
     }
-<<<<<<< HEAD
-=======
-
->>>>>>> 90070b720a04038431508cf72882a1ded5f7deaf
   }, 1000);
 }
 
@@ -323,10 +279,6 @@ function startCountdown(seconds) {
 shootBtn.addEventListener("click", () => {
 
   if (isCameraActive) {
-<<<<<<< HEAD
-=======
-
->>>>>>> 90070b720a04038431508cf72882a1ded5f7deaf
     startCountdown(3);
 
   } else {
@@ -339,10 +291,6 @@ shootBtn.addEventListener("click", () => {
 
 // Handle retake button
 retakeBtn.addEventListener("click", () => {
-<<<<<<< HEAD
-=======
-
->>>>>>> 90070b720a04038431508cf72882a1ded5f7deaf
   // RESET SEMUA
   capturedImages = [];
   currentSlot = 0;
@@ -371,23 +319,14 @@ retakeBtn.addEventListener("click", () => {
 
 // Handle download button
 downloadBtn.addEventListener("click", () => {
-<<<<<<< HEAD
-  if (downloadBtn.dataset.image) {
-=======
 
   if (downloadBtn.dataset.image) {
 
->>>>>>> 90070b720a04038431508cf72882a1ded5f7deaf
     const link = document.createElement("a");
 
     link.href = downloadBtn.dataset.image;
 
-<<<<<<< HEAD
-    link.download = `photobooth-${Date.now()}.png`;
-=======
-    link.download =
-      `photobooth-${Date.now()}.png`;
->>>>>>> 90070b720a04038431508cf72882a1ded5f7deaf
+    link.download =  `photobooth-${Date.now()}.png`;
 
     link.click();
   }
@@ -395,10 +334,6 @@ downloadBtn.addEventListener("click", () => {
 
 // Handle back button
 backBtn.addEventListener("click", () => {
-<<<<<<< HEAD
-=======
-
->>>>>>> 90070b720a04038431508cf72882a1ded5f7deaf
   window.location.href = "index.html";
 });
 
@@ -431,7 +366,7 @@ document.querySelectorAll(".filter-btn").forEach((btn) => {
     e.target.classList.add("active");
 
     currentFilter = e.target.dataset.filter;
-    
+
     updateLiveFilter();
   });
 });
