@@ -34,16 +34,16 @@ let timerInterval;
 
 // Frame colors
 const frameColors = {
-  red: "rgba(248, 124, 139, 0.62)",
+  red: "rgba(251, 14, 41, 0.62)",
   pink: "rgba(255, 192, 203, 0.62)",
   blue: "rgba(145, 181, 230, 0.62)",
 };
 
 // TEMPLATE FRAME
 const frameTemplates = {
-  red: "FrameMerah.jpeg",
-  pink: "FramePink.jpeg",
-  blue: "FrameBiru.jpeg",
+  red: "frameFixMerah.jpg",
+  pink: "frameFixPink.jpg",
+  blue: "frameBiru.jpg",
 };
 
 // Update frame color & overlay
