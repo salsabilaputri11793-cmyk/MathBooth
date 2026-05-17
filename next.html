@@ -19,8 +19,8 @@
   </head>
 
   <body>
+    <img src="background.png" alt="latar" class="bg-image" />
     <div class="container">
-      <img src="background.png" alt="latar" class="bg-image" />
       <div class="main-panel">
         <!-- PANEL -->
         <div class="panel-bg-outer"></div>
@@ -92,16 +92,14 @@
             style="
               width: 100%;
               height: 100%;
-              background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+              background: transparent;
               display: flex;
               align-items: center;
               justify-content: center;
-              color: white;
+              color: rgba(0, 0, 0, 0.5);
               font-size: 18px;
             "
-          >
-            Preview
-          </div>
+          ></div>
 
           <img
             id="previewImg"
@@ -116,7 +114,7 @@
           />
 
           <!-- TEMPLATE STRIP -->
-          <img id="frameOverlay" src="Frame Red.jpeg" />
+          <img id="frameOverlay" src="FrameMerah.jpg" />
         </div>
 
         <!-- CAMERA -->
@@ -145,5 +143,17 @@
 
     <!-- JS -->
     <script src="nextPie.js"></script>
+    <script>
+      function resizePanel() {
+        const container = document.querySelector(".container");
+        // padding for a little breathing room
+        const scaleX = window.innerWidth / 1340;
+        const scaleY = window.innerHeight / 990;
+        const scale = Math.min(scaleX, scaleY);
+        container.style.transform = `translate(-50%, -50%) scale(${scale})`;
+      }
+      window.addEventListener("resize", resizePanel);
+      resizePanel();
+    </script>
   </body>
 </html>

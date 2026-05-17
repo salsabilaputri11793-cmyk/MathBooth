@@ -34,16 +34,35 @@ let timerInterval;
 
 // Frame colors
 const frameColors = {
-  red: "rgba(248, 124, 139, 0.62)",
+  red: "rgba(251, 14, 41, 0.62)",
   pink: "rgba(255, 192, 203, 0.62)",
   blue: "rgba(145, 181, 230, 0.62)",
 };
 
 // TEMPLATE FRAME
 const frameTemplates = {
-  red: "FrameMerah.jpeg",
-  pink: "FramePink.jpeg",
-  blue: "FrameBiru.jpeg",
+  red: "frameFixMerah.png",
+  pink: "frameFixPink.png",
+  blue: "frameFixBiru.png",
+};
+
+// UKURAN DAN POSISI SLOT UNTUK MASING-MASING FRAME
+const frameSlots = {
+  red: [
+    { x: 45, y: 316, w: 310, h: 225 },
+    { x: 45, y: 559, w: 310, h: 225 },
+    { x: 45, y: 802, w: 310, h: 225 },
+  ],
+  pink: [
+    { x: 140, y: 245, w: 237, h: 236 },
+    { x: 140, y: 543, w: 237, h: 235 },
+    { x: 140, y: 845, w: 237, h: 230 },
+  ],
+  blue: [
+    { x: 74, y: 202, w: 276, h: 284 },
+    { x: 74, y: 568, w: 276, h: 284 },
+    { x: 74, y: 932, w: 276, h: 268 },
+  ],
 };
 
 // Update frame color & overlay
@@ -52,6 +71,37 @@ function updateFrameColor() {
 
   if (frameOverlay) {
     frameOverlay.src = frameTemplates[currentFrame];
+  }
+
+  // Update ukuran kamera sesuai rasio lubang frame
+  const cameraInner = document.querySelector(".camera-bg-inner");
+  if (cameraInner) {
+    if (currentFrame === "blue") {
+      cameraInner.style.width = "360px";
+      cameraInner.style.left = "230px";
+    } else if (currentFrame === "pink") {
+      cameraInner.style.width = "372px";
+      cameraInner.style.left = "224px";
+    } else {
+      // red
+      cameraInner.style.width = "510px";
+      cameraInner.style.left = "155px";
+    }
+  }
+
+  // Update background di belakang preview frame
+  const previewGradient = document.querySelector(".preview-gradient");
+  if (previewGradient) {
+    if (currentFrame === "red") {
+      previewGradient.style.background =
+        "linear-gradient(180deg, #4a332a 0%, #2b1d18 100%)"; // Coklat tua
+    } else if (currentFrame === "pink") {
+      previewGradient.style.background =
+        "linear-gradient(180deg, #fad0c4 0%, #ffd1ff 100%)"; // Pink muda pastel
+    } else if (currentFrame === "blue") {
+      previewGradient.style.background =
+        "linear-gradient(180deg, #a1c4fd 0%, #c2e9fb 100%)"; // Biru muda pastel
+    }
   }
 
   // render ulang preview kalau user ganti frame
@@ -113,8 +163,9 @@ function updateLiveFilter() {
   video.style.filter = cssFilter;
   capturedPhoto.style.filter = cssFilter;
 
-  if (previewImg) {
-    previewImg.style.filter = cssFilter;
+  // Render ulang kalau ganti filter setelah ambil foto
+  if (capturedImages.length > 0) {
+    renderPhotoStrip();
   }
 }
 
@@ -140,14 +191,8 @@ function capturePhoto() {
   ctx.translate(canvas.width, 0);
   ctx.scale(-1, 1);
 
-  // filter
-  if (currentFilter === "bw") {
-    ctx.filter = "grayscale(100%)";
-  } else if (currentFilter === "vintage") {
-    ctx.filter = "sepia(60%) contrast(110%) brightness(90%)";
-  } else {
-    ctx.filter = "none";
-  }
+  // Jangan aplikasikan filter di sini, simpan foto asli
+  ctx.filter = "none";
 
   // Cetak gambar
   ctx.drawImage(video, 0, 0);
@@ -184,12 +229,8 @@ function renderPhotoStrip() {
   stripCanvas.width = 400;
   stripCanvas.height = 1200;
 
-  // POSISI SLOT FOTO
-  const slots = [
-    { x: 60, y: 90, w: 280, h: 280 },
-    { x: 60, y: 430, w: 280, h: 280 },
-    { x: 60, y: 770, w: 280, h: 280 },
-  ];
+  // POSISI SLOT FOTO (Disesuaikan dengan frame yang dipilih)
+  const slots = frameSlots[currentFrame];
 
   let loadedCount = 0;
 
@@ -201,7 +242,38 @@ function renderPhotoStrip() {
     img.onload = () => {
       const s = slots[index];
 
-      ctx.drawImage(img, s.x, s.y, s.w, s.h);
+      // Logic untuk object-fit: cover (supaya foto tidak gepeng)
+      const imgRatio = img.width / img.height;
+      const slotRatio = s.w / s.h;
+
+      let sx, sy, sw, sh;
+      if (imgRatio > slotRatio) {
+        // Gambar lebih lebar dari slot, potong kiri kanan
+        sh = img.height;
+        sw = img.height * slotRatio;
+        sx = (img.width - sw) / 2;
+        sy = 0;
+      } else {
+        // Gambar lebih tinggi dari slot, potong atas bawah
+        sw = img.width;
+        sh = img.width / slotRatio;
+        sx = 0;
+        sy = (img.height - sh) / 2;
+      }
+
+      // Aplikasikan filter SAAT menggambar ke photostrip (jadi bisa diganti-ganti)
+      if (currentFilter === "bw") {
+        ctx.filter = "grayscale(100%)";
+      } else if (currentFilter === "vintage") {
+        ctx.filter = "sepia(60%) contrast(110%) brightness(90%)";
+      } else {
+        ctx.filter = "none";
+      }
+
+      ctx.drawImage(img, sx, sy, sw, sh, s.x, s.y, s.w, s.h);
+
+      // Reset filter kembali ke none (supaya frame tidak kena filter)
+      ctx.filter = "none";
 
       loadedCount++;
 
