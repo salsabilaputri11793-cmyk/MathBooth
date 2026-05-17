@@ -186,9 +186,9 @@ function renderPhotoStrip() {
 
   // POSISI SLOT FOTO
   const slots = [
-    { x: 60, y: 90, w: 280, h: 280 },
-    { x: 60, y: 430, w: 280, h: 280 },
-    { x: 60, y: 770, w: 280, h: 280 },
+    { x: 45, y: 320, w: 330, h: 225 },
+    { x: 45, y: 559, w: 340, h: 225 },
+    { x: 45, y: 802, w: 350, h: 225 },
   ];
 
   let loadedCount = 0;
