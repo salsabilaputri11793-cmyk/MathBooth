@@ -34,16 +34,16 @@ let timerInterval;
 
 // Frame colors
 const frameColors = {
-  red: "rgba(251, 14, 41, 0.62)",
+  red: "rgba(248, 124, 139, 0.62)",
   pink: "rgba(255, 192, 203, 0.62)",
   blue: "rgba(145, 181, 230, 0.62)",
 };
 
 // TEMPLATE FRAME
 const frameTemplates = {
-  red: "frameFixMerah.png",
-  pink: "frameFixPink.png",
-  blue: "framefixBiru.png",
+  red: "FrameMerah.jpeg",
+  pink: "FramePink.jpeg",
+  blue: "FrameBiru.jpeg",
 };
 
 // Update frame color & overlay
@@ -186,9 +186,9 @@ function renderPhotoStrip() {
 
   // POSISI SLOT FOTO
   const slots = [
-    { x: 45, y: 320, w: 330, h: 225 },
-    { x: 45, y: 559, w: 340, h: 225 },
-    { x: 45, y: 802, w: 350, h: 225 },
+    { x: 60, y: 90, w: 280, h: 280 },
+    { x: 60, y: 430, w: 280, h: 280 },
+    { x: 60, y: 770, w: 280, h: 280 },
   ];
 
   let loadedCount = 0;
